@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery Detail • Kenari Tower Hotel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;font-family:Inter,sans-serif;background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(99,102,241,.15), transparent 40%),
+      radial-gradient(800px 500px at 90% 90%, rgba(16,185,129,.12), transparent 40%),
+      linear-gradient(180deg,#0b1220,#020617);color:#e5e7eb;padding:24px}
+    .shell{max-width:1100px;margin:0 auto}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-radius:20px;
+      background:rgba(15,23,42,.70);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 18px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03)}
+    .brand h1{margin:0;font-size:16px;font-weight:600}
+    .brand p{margin:4px 0 0;font-size:12px;color:#9ca3af}
+    .userbox{display:flex;align-items:center;gap:12px}
+    .pill{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(2,6,23,.55);font-size:12px;color:#cbd5f5;white-space:nowrap}
+    .btn{border:none;cursor:pointer;padding:10px 12px;border-radius:14px;font-weight:600;font-size:12px;
+      transition:all .2s ease;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .btn:hover{transform:translateY(-1px)}
+    .btnGhost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);color:#e5e7eb}
+    .btnDanger{background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.25);color:#fecaca}
+
+    .content{margin-top:18px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    @media(max-width:900px){.content{grid-template-columns:1fr}}
+
+    .card{background:rgba(15,23,42,.70);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;padding:18px;box-shadow:0 18px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03)}
+    .title{margin:0 0 6px;font-size:18px;font-weight:600}
+    .muted{margin:0;font-size:13px;color:#9ca3af;line-height:1.6}
+
+    label{display:block;font-size:12px;color:#cbd5f5;margin:10px 0 6px}
+    input, textarea{
+      width:100%;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(2,6,23,.60);color:#e5e7eb;font-size:14px;outline:none;transition:all .2s ease
+    }
+    textarea{min-height:130px;resize:vertical}
+    input:focus, textarea:focus{
+      border-color:rgba(99,102,241,.7);box-shadow:0 0 0 2px rgba(99,102,241,.15);background:rgba(2,6,23,.80)
+    }
+    .miniGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:520px){.miniGrid{grid-template-columns:1fr}}
+
+    .thumb{width:100%;height:220px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;color:#94a3b8}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .saveBar{margin-top:14px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      padding-top:14px;border-top:1px solid rgba(255,255,255,.06)}
+    .btnPrimary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;border:0;padding:12px 16px;
+      box-shadow:0 10px 25px rgba(79,70,229,.35)}
+    .status{padding:10px 12px;border-radius:16px;font-size:12px;border:1px solid transparent}
+    .ok{background:rgba(16,185,129,.10);border-color:rgba(16,185,129,.25);color:#bbf7d0}
+    .err{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.30);color:#fecaca}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <h1>Kenari Tower Hotel</h1>
+        <p>Gallery Detail • CMS</p>
+      </div>
+      <div class="userbox">
+        <div class="pill"><%= user?.email || "unknown" %></div>
+        <div class="pill">Role: <%= user?.role || "-" %></div>
+        <a class="btn btnGhost" href="/admin/gallery">← Back</a>
+        <form method="POST" action="/auth/logout" style="margin:0;">
+          <button class="btn btnDanger" type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <h2 class="title">Edit Gallery Item</h2>
+        <p class="muted">Title & description ini untuk “detail” (modal/page) nanti. Overlay label untuk teks di atas foto.</p>
+
+        <form method="POST" action="/admin/gallery/<%= item.id %>">
+          <div class="miniGrid">
+            <div>
+              <label>Sort Order</label>
+              <input name="sort_order" value="<%= item.sort_order %>" />
+            </div>
+            <div>
+              <label>Active (1/0)</label>
+              <input name="is_active" value="<%= item.is_active %>" />
+            </div>
+          </div>
+
+          <label>Overlay Label (text di hover)</label>
+          <input name="overlay_label" value="<%= item.overlay_label || '' %>" placeholder="Deluxe Room" />
+
+          <label>Title (detail)</label>
+          <input name="title" value="<%= item.title || '' %>" placeholder="Deluxe Room" />
+
+          <label>Description (detail)</label>
+          <textarea name="description" placeholder="Write a short, cozy description..."><%= item.description || '' %></textarea>
+
+          <label>Image URL</label>
+          <input name="image_path" value="<%= item.image_path || '' %>" placeholder="https://..." />
+
+          <label>Alt Text</label>
+          <input name="alt_text" value="<%= item.alt_text || '' %>" placeholder="Deluxe Room" />
+
+          <div class="saveBar">
+            <button class="btn btnPrimary" type="submit">Save Changes</button>
+            <div>
+              <% if (saved) { %><div class="status ok">✅ Saved successfully.</div><% } %>
+              <% if (error) { %><div class="status err">❌ <%= error %></div><% } %>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3 class="title" style="font-size:14px;margin-bottom:10px;">Preview</h3>
+        <div class="thumb">
+          <% if (item.image_path) { %>
+            <img src="<%= item.image_path %>" alt="preview" onerror="this.remove(); this.parentElement.textContent='No Preview';" />
+          <% } else { %>
+            No Preview
+          <% } %>
+        </div>
+
+        <!-- <p class="muted" style="margin-top:12px;">
+          Nanti frontend bisa pakai <code>title</code> & <code>description</code> untuk modal detail ketika item di klik.
+        </p> -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

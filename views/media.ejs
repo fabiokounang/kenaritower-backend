@@ -1,0 +1,35 @@
+<%- include('partials/top', { title: 'Media' }) %>
+
+<div class="pagehead">
+  <div>
+    <h1>Media</h1>
+    <p class="muted">Upload images and manage assets.</p>
+  </div>
+</div>
+
+<form method="POST" action="/media/upload" enctype="multipart/form-data" class="form row">
+  <input type="file" name="file" accept="image/*" required />
+  <button type="submit" class="primary">Upload</button>
+</form>
+
+<div class="grid3">
+  <% (items || []).forEach(function(it){ %>
+    <div class="mediaCard">
+      <div class="thumb">
+        <img src="<%= it.url %>" alt="media">
+      </div>
+      <div class="meta">
+        <div class="small"><%= it.filename %></div>
+        <form method="POST" action="/media/<%= it.id %>/delete" onsubmit="return confirm('Delete this file?')">
+          <button class="danger" type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<% if (!items || items.length === 0) { %>
+  <div class="muted">No media yet.</div>
+<% } %>
+
+<%- include('partials/bottom') %>

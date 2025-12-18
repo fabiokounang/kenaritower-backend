@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard • Kenari Tower Hotel</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(99,102,241,.15), transparent 40%),
+        radial-gradient(800px 500px at 90% 90%, rgba(16,185,129,.12), transparent 40%),
+        linear-gradient(180deg, #0b1220, #020617);
+      color: #e5e7eb;
+      padding: 24px;
+    }
+    .shell { max-width: 1100px; margin: 0 auto; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 18px; border-radius: 20px;
+      background: rgba(15, 23, 42, 0.70);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .brand h1 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: .3px; }
+    .brand p { margin: 4px 0 0; font-size: 12px; color: #9ca3af; }
+
+    .userbox { display: flex; align-items: center; gap: 12px; }
+    .pill {
+      padding: 8px 10px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(2, 6, 23, .55);
+      font-size: 12px; color: #cbd5f5; white-space: nowrap;
+    }
+    .logoutBtn {
+      border: none; cursor: pointer; padding: 10px 12px; border-radius: 14px;
+      background: rgba(239, 68, 68, .10);
+      border: 1px solid rgba(239, 68, 68, .25);
+      color: #fecaca; font-weight: 600; font-size: 12px;
+      transition: all .2s ease;
+    }
+    .logoutBtn:hover {
+      transform: translateY(-1px);
+      background: rgba(239, 68, 68, .14);
+      border-color: rgba(239, 68, 68, .35);
+    }
+
+    .content {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+    }
+    @media (max-width: 900px) { .content { grid-template-columns: 1fr; } }
+
+    .card {
+      background: rgba(15, 23, 42, 0.70);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .heroTitle { margin: 0 0 6px; font-size: 20px; font-weight: 600; letter-spacing: .2px; }
+    .muted { margin: 0; font-size: 13px; color: #9ca3af; line-height: 1.6; }
+
+    .grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
+
+    .actionCard {
+      background: rgba(2, 6, 23, .60);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all .25s ease;
+      user-select: none;
+    }
+    .actionCard:hover {
+      transform: translateY(-2px);
+      border-color: rgba(99,102,241,.45);
+      box-shadow: 0 16px 30px rgba(0,0,0,.35);
+    }
+    .actionCard h3 { margin: 0 0 6px; font-size: 14px; font-weight: 600; }
+    .actionCard p { margin: 0; font-size: 12px; color: #94a3b8; line-height: 1.55; }
+
+    .smallCardTitle { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
+    .kv {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 13px;
+    }
+    .kv:last-child { border-bottom: none; }
+    .k { color: #9ca3af; }
+    .v { color: #e5e7eb; word-break: break-word; }
+
+    .hint {
+      margin-top: 12px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(99,102,241,.25);
+      background: rgba(99,102,241,.08);
+      color: #c7d2fe;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .footerNote { margin-top: 18px; text-align: center; font-size: 12px; color: #94a3b8; }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+
+    <div class="topbar">
+      <div class="brand">
+        <h1>Kenari Tower Hotel</h1>
+        <p>Admin Dashboard</p>
+      </div>
+
+      <div class="userbox">
+        <div class="pill"><%= user?.email || "unknown" %></div>
+        <div class="pill">Role: <%= user?.role || "-" %></div>
+
+        <form method="POST" action="/auth/logout" style="margin:0;">
+          <button class="logoutBtn" type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <h2 class="heroTitle">Welcome back 👋</h2>
+        <p class="muted">
+          Semua konten di <strong>kenaritower.com</strong> nanti ambil dari <strong>/api/cms</strong>.
+          Location, Contact, dan Footer masuknya dari <strong>Hotel Profile</strong>.
+        </p>
+
+        <div class="grid">
+          <div class="actionCard" onclick="location.href='/admin/hotel'">
+            <h3>Hotel Profile</h3>
+            <p>Nama hotel, alamat, phone, email, WhatsApp, Maps, footer about.</p>
+          </div>
+
+          <div class="actionCard" onclick="location.href='/admin/home'">
+            <h3>Homepage Text</h3>
+            <p>Hero title & subtitle (teks saja).</p>
+          </div>
+
+          <div class="actionCard" onclick="location.href='/admin/hero-images'">
+            <h3>Hero Carousel Images</h3>
+            <p>Kelola 3 gambar slider di hero.</p>
+          </div>
+
+          <div class="actionCard" onclick="location.href='/admin/gallery'">
+            <h3>Gallery</h3>
+            <p>Gambar + overlay label.</p>
+          </div>
+
+          <div class="actionCard" onclick="location.href='/admin/facilities'">
+            <h3>Facilities</h3>
+            <p>List fasilitas (emoji + title + desc).</p>
+          </div>
+
+          <div class="actionCard" onclick="location.href='/admin/services'">
+            <h3>Services</h3>
+            <p>List service (title + desc).</p>
+          </div>
+        </div>
+
+        <!-- <div class="hint">
+          Next: kita bikin CMS <strong>Facilities</strong> & <strong>Services</strong> (list) + update <strong>/api/cms</strong>.
+        </div> -->
+      </div>
+
+      <div class="card">
+        <h3 class="smallCardTitle">Session Info</h3>
+
+        <div class="kv">
+          <div class="k">Email</div>
+          <div class="v"><%= user?.email || "-" %></div>
+        </div>
+
+        <div class="kv">
+          <div class="k">Role</div>
+          <div class="v"><%= user?.role || "-" %></div>
+        </div>
+
+        <div class="kv">
+          <div class="k">Token Exp</div>
+          <div class="v">
+            <% if (user?.exp) { %>
+              <%= new Date(user.exp * 1000).toLocaleString() %>
+            <% } else { %>
+              -
+            <% } %>
+          </div>
+        </div>
+
+        <p class="muted" style="margin-top:12px;">
+          Kalau token expired, kamu akan otomatis balik ke login.
+        </p>
+      </div>
+    </div>
+
+    <div class="footerNote">Cozy Admin • Kenari Tower Hotel</div>
+
+  </div>
+</body>
+</html>

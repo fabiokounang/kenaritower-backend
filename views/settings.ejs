@@ -1,0 +1,46 @@
+<%- include('partials/top', { title: 'Settings' }) %>
+
+<div class="pagehead">
+  <div>
+    <h1>Settings</h1>
+    <p class="muted">Hotel identity & contact info.</p>
+  </div>
+</div>
+
+<% if (saved) { %>
+  <div class="flash ok">Saved!</div>
+<% } %>
+
+<form method="POST" class="form">
+  <div class="grid2">
+    <div>
+      <label>Hotel Name</label>
+      <input name="hotelName" value="<%= data.hotelName %>" />
+    </div>
+    <div>
+      <label>Phone</label>
+      <input name="phone" value="<%= data.phone %>" />
+    </div>
+    <div>
+      <label>Email</label>
+      <input name="email" value="<%= data.email %>" />
+    </div>
+    <div>
+      <label>WhatsApp (wa.me)</label>
+      <input name="whatsapp" value="<%= data.whatsapp %>" />
+    </div>
+    <div class="span2">
+      <label>Address</label>
+      <textarea name="address" rows="3"><%= data.address %></textarea>
+    </div>
+    <div class="span2">
+      <label>Maps Embed URL</label>
+      <textarea name="mapsEmbedUrl" rows="3"><%= data.mapsEmbedUrl %></textarea>
+      <div class="muted small">Paste iframe src URL (output=embed)</div>
+    </div>
+  </div>
+
+  <button type="submit" class="primary">Save</button>
+</form>
+
+<%- include('partials/bottom') %>

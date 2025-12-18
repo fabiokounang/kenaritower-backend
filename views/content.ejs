@@ -1,0 +1,44 @@
+<%- include('partials/top', { title: 'Content' }) %>
+
+<div class="pagehead">
+  <div>
+    <h1>Content</h1>
+    <p class="muted">Edit text by language, section, and key.</p>
+  </div>
+  <div class="row">
+    <a class="btn <%= lang==='en' ? 'primary' : '' %>" href="/content?lang=en">EN</a>
+    <a class="btn <%= lang==='id' ? 'primary' : '' %>" href="/content?lang=id">ID</a>
+  </div>
+</div>
+
+<% if (saved) { %>
+  <div class="flash ok">Saved!</div>
+<% } %>
+
+<form method="POST" class="form">
+  <input type="hidden" name="lang" value="<%= lang %>"/>
+
+  <div class="grid2">
+    <div>
+      <label>Section</label>
+      <input name="section" placeholder="hero / about / contact" required />
+    </div>
+    <div>
+      <label>Key</label>
+      <input name="key" placeholder="headline / tagline / title" required />
+    </div>
+    <div class="span2">
+      <label>Value</label>
+      <textarea name="value" rows="4" placeholder="Write the text..." required></textarea>
+    </div>
+  </div>
+
+  <button type="submit" class="primary">Save</button>
+</form>
+
+<div class="form">
+  <h3 style="margin-top:0">Current Content (<%= lang %>)</h3>
+  <pre class="code"><%= JSON.stringify(content, null, 2) %></pre>
+</div>
+
+<%- include('partials/bottom') %>

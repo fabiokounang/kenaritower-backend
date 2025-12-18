@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homepage Content • Kenari Tower Hotel</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    body{
+      margin:0; min-height:100vh; font-family:'Inter',sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(99,102,241,.15), transparent 40%),
+        radial-gradient(800px 500px at 90% 90%, rgba(16,185,129,.12), transparent 40%),
+        linear-gradient(180deg, #0b1220, #020617);
+      color:#e5e7eb; padding:24px;
+    }
+    .shell{ max-width:1100px; margin:0 auto; }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:16px 18px; border-radius:20px;
+      background:rgba(15,23,42,.70); backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 18px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .brand h1{ margin:0; font-size:16px; font-weight:600; letter-spacing:.3px; }
+    .brand p{ margin:4px 0 0; font-size:12px; color:#9ca3af; }
+
+    .userbox{ display:flex; align-items:center; gap:12px; }
+    .pill{
+      padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(2,6,23,.55);
+      font-size:12px; color:#cbd5f5; white-space:nowrap;
+    }
+
+    .btnRow{ display:flex; gap:10px; align-items:center; }
+    .btn{
+      border:none; cursor:pointer; padding:10px 12px; border-radius:14px;
+      font-weight:600; font-size:12px; transition:all .2s ease;
+      text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .btnGhost{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); color:#e5e7eb; }
+    .btnDanger{ background:rgba(239,68,68,.10); border:1px solid rgba(239,68,68,.25); color:#fecaca; }
+
+    .content{
+      margin-top:18px;
+      display:grid; grid-template-columns:1.2fr .8fr; gap:18px;
+    }
+    @media (max-width:900px){ .content{ grid-template-columns:1fr; } }
+
+    .card{
+      background:rgba(15,23,42,.70); backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px; padding:18px;
+      box-shadow:0 18px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .title{ margin:0 0 6px; font-size:18px; font-weight:600; }
+    .muted{ margin:0; font-size:13px; color:#9ca3af; line-height:1.6; }
+
+    label{ display:block; font-size:12px; color:#cbd5f5; margin:10px 0 6px; }
+    input, textarea{
+      width:100%; padding:12px 14px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(2,6,23,.60);
+      color:#e5e7eb; font-size:14px; outline:none; transition:all .2s ease;
+    }
+    textarea{ min-height:120px; resize:vertical; }
+    input:focus, textarea:focus{
+      border-color:rgba(99,102,241,.7);
+      box-shadow:0 0 0 2px rgba(99,102,241,.15);
+      background:rgba(2,6,23,.80);
+    }
+
+    .saveBar{
+      margin-top:14px; display:flex; gap:12px; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; padding-top:14px; border-top:1px solid rgba(255,255,255,.06);
+    }
+    .btnPrimary{
+      background:linear-gradient(135deg,#6366f1,#4f46e5);
+      color:white; box-shadow:0 10px 25px rgba(79,70,229,.35);
+      border:0; padding:12px 16px;
+    }
+
+    .status{
+      padding:10px 12px; border-radius:16px; font-size:12px; line-height:1.6;
+      border:1px solid transparent;
+    }
+    .statusOk{ background:rgba(16,185,129,.10); border-color:rgba(16,185,129,.25); color:#bbf7d0; }
+    .statusErr{ background:rgba(239,68,68,.12); border-color:rgba(239,68,68,.30); color:#fecaca; }
+
+    .kv{
+      display:grid; grid-template-columns:130px 1fr;
+      gap:10px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.06);
+      font-size:13px;
+    }
+    .kv:last-child{ border-bottom:none; }
+    .k{ color:#9ca3af; }
+    .v{ color:#e5e7eb; word-break:break-word; }
+
+    .hint{
+      margin-top:12px; padding:12px 12px; border-radius:16px;
+      border:1px solid rgba(99,102,241,.25);
+      background:rgba(99,102,241,.08); color:#c7d2fe;
+      font-size:12px; line-height:1.6;
+    }
+
+    .footerNote{ margin-top:18px; text-align:center; font-size:12px; color:#94a3b8; }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+
+    <div class="topbar">
+      <div class="brand">
+        <h1>Kenari Tower Hotel</h1>
+        <p>Homepage Content • CMS</p>
+      </div>
+
+      <div class="userbox">
+        <div class="pill"><%= user?.email || "unknown" %></div>
+        <div class="pill">Role: <%= user?.role || "-" %></div>
+
+        <div class="btnRow">
+          <a class="btn btnGhost" href="/admin">← Dashboard</a>
+          <form method="POST" action="/auth/logout" style="margin:0;">
+            <button class="btn btnDanger" type="submit">Logout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Left -->
+      <div class="card">
+        <h2 class="title">Homepage Content</h2>
+        <p class="muted">Konten ini dipakai di hero section homepage (judul, deskripsi, dan CTA).</p>
+
+        <form method="POST" action="/admin/home">
+          <label>Hero Title *</label>
+          <input name="hero_title" value="<%= data?.hero_title || '' %>" placeholder="Stay in Comfort, Feel at Home" required />
+
+          <label>Hero Subtitle</label>
+          <textarea name="hero_subtitle" placeholder="Modern rooms, warm service, great location."><%= data?.hero_subtitle || '' %></textarea>
+
+          <label>CTA Text</label>
+          <input name="cta_text" value="<%= data?.cta_text || '' %>" placeholder="Book Now" />
+
+          <label>CTA Link</label>
+          <input name="cta_link" value="<%= data?.cta_link || '' %>" placeholder="#contact atau https://..." />
+
+          <div class="saveBar">
+            <button class="btn btnPrimary" type="submit">Save Changes</button>
+
+            <div>
+              <% if (saved) { %>
+                <div class="status statusOk">✅ Saved successfully.</div>
+              <% } %>
+              <% if (error) { %>
+                <div class="status statusErr">❌ <%= error %></div>
+              <% } %>
+            </div>
+          </div>
+        </form>
+
+        <!-- <div class="hint">
+          Next: konten ini akan otomatis ikut keluar di endpoint <strong>/api/cms</strong> bagian <strong>home</strong>.
+        </div> -->
+      </div>
+
+      <!-- Right -->
+      <div class="card">
+        <h3 class="title" style="font-size:14px; margin-bottom:10px;">Preview (Ringkas)</h3>
+
+        <div class="kv">
+          <div class="k">Hero Title</div>
+          <div class="v"><%= data?.hero_title || '-' %></div>
+        </div>
+        <div class="kv">
+          <div class="k">CTA</div>
+          <div class="v"><%= (data?.cta_text || '-') + ' → ' + (data?.cta_link || '-') %></div>
+        </div>
+        <div class="kv">
+          <div class="k">Updated</div>
+          <div class="v"><%= data?.updated_at ? new Date(data.updated_at).toLocaleString() : '-' %></div>
+        </div>
+
+        <!-- <p class="muted" style="margin-top:12px;">
+          Setelah ini, kita update payload <strong>/api/cms</strong> supaya frontend client dapat: <code>data.home</code>.
+        </p> -->
+      </div>
+    </div>
+
+    <div class="footerNote">Cozy Admin • Kenari Tower Hotel</div>
+  </div>
+</body>
+</html>
