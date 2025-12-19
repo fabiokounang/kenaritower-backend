@@ -16,8 +16,38 @@ const admin = require("./routes/admin");
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(cors({ credentials: true }));
-app.options("*", cors({ credentials: true }));
+const ALLOWED_ORIGINS = new Set([
+  "http://localhost:8080",
+  "http://127.0.0.1:8080",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "https://kenaritower.com",
+  "https://www.kenaritower.com",
+  // kalau kamu kadang akses FE lewat netlify subdomain:
+  // "https://kenaritower.netlify.app",
+]);
+
+const corsOptions = {
+  origin: (origin, cb) => {
+    // allow server-to-server, curl, same-origin
+    if (!origin) return cb(null, true);
+
+    // normalize (hapus trailing slash kalau ada)
+    const normalized = origin.replace(/\/$/, "");
+
+    if (ALLOWED_ORIGINS.has(normalized)) return cb(null, true);
+
+    // jangan throw error biar nggak spam log & nggak bikin 500
+    console.log("[CORS BLOCKED]", { origin, normalized });
+    return cb(null, false);
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
