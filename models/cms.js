@@ -106,9 +106,9 @@ async function getPublicCMS() {
       subtitle: f.subtitle
     })),
     about: {
-      title: about[0].title,
-      description: about[0].description,
-      imageUrl: about[0].image_path
+      title: about[0]?.title,
+      description: about[0]?.description,
+      imageUrl: about[0]?.image_path
     },
     // ✅ NEW
     services: serviceRows.map(s => ({
