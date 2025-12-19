@@ -39,6 +39,7 @@ app.use(cors({
 
 // ✅ Preflight
 app.options("*", cors());
+app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -60,5 +61,5 @@ app.use("/admin", admin);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ CMS running on http://localhost:${PORT}`);
+  console.log(`✅ CMS running on port ${PORT}`);
 });
