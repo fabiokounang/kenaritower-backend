@@ -12,10 +12,10 @@ async function saveHomeCMS(req, res) {
     const payload = {
       hero_title: String(req.body.hero_title || "").trim(),
       hero_subtitle: String(req.body.hero_subtitle || "").trim(),
-      cta_text: String(req.body.cta_text || "").trim(),
+      cta_text: String(req.body?.cta_text || "").trim(),
       cta_link: String(req.body.cta_link || "").trim()
     };
-
+    console.log(payload, 'payload')
     if (!payload.hero_title) {
       const data = await getHome();
       return res.status(400).render("admin/home", {
