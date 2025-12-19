@@ -16,37 +16,41 @@ const admin = require("./routes/admin");
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-const ALLOWED_ORIGINS = new Set([
-  "http://localhost:8080",
-  "http://127.0.0.1:8080",
-  "http://localhost:3000",
-  "http://127.0.0.1:3000",
-  "https://kenaritower.com",
-  "https://www.kenaritower.com",
-  // kalau kamu kadang akses FE lewat netlify subdomain:
-  // "https://kenaritower.netlify.app",
-]);
+const cors = require("cors");
 
-const corsOptions = {
-  origin: (origin, cb) => {
-    // allow server-to-server, curl, same-origin
-    if (!origin) return cb(null, true);
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true; // curl, server-to-server
 
-    // normalize (hapus trailing slash kalau ada)
-    const normalized = origin.replace(/\/$/, "");
+  // allow kenaritower.com + subdomain apapun
+  if (/^https:\/\/([a-z0-9-]+\.)*kenaritower\.com$/i.test(origin)) {
+    return true;
+  }
 
-    if (ALLOWED_ORIGINS.has(normalized)) return cb(null, true);
+  // allow netlify domains (production + preview)
+  if (/^https:\/\/([a-z0-9-]+--)?kenaritower\.netlify\.app$/i.test(origin)) {
+    return true;
+  }
 
-    // jangan throw error biar nggak spam log & nggak bikin 500
-    console.log("[CORS BLOCKED]", { origin, normalized });
-    return cb(null, false);
-  },
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-  credentials: true,
+  // local dev
+  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) {
+    return true;
+  }
+
+  return false;
 };
 
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: (origin, cb) => {
+    if (isAllowedOrigin(origin)) return cb(null, true);
+
+    console.error("❌ CORS BLOCKED:", origin);
+    return cb(null, false); // JANGAN throw error
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+}));
+
 app.options("*", cors(corsOptions));
 app.set("trust proxy", 1);
 app.use(cookieParser());
