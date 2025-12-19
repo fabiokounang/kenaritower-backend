@@ -16,40 +16,8 @@ const admin = require("./routes/admin");
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-const isAllowedOrigin = (origin) => {
-  if (!origin) return true; // curl, server-to-server
-
-  // allow kenaritower.com + subdomain apapun
-  if (/^https:\/\/([a-z0-9-]+\.)*kenaritower\.com$/i.test(origin)) {
-    return true;
-  }
-
-  // allow netlify domains (production + preview)
-  if (/^https:\/\/([a-z0-9-]+--)?kenaritower\.netlify\.app$/i.test(origin)) {
-    return true;
-  }
-
-  // local dev
-  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) {
-    return true;
-  }
-
-  return false;
-};
-
-app.use(cors({
-  origin: (origin, cb) => {
-    if (isAllowedOrigin(origin)) return cb(null, true);
-
-    console.error("❌ CORS BLOCKED:", origin);
-    return cb(null, false); // JANGAN throw error
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-}));
-
-app.options("*", cors(corsOptions));
+app.use(cors({ credentials: true }));
+app.options("*", cors({ credentials: true }));
 app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
