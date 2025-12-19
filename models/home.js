@@ -7,7 +7,7 @@ async function getHome() {
   const pool = getPool();
   const [rows] = await pool.query(
     `SELECT id, hero_title, hero_subtitle, cta_text, cta_link, updated_at
-     FROM cms_home
+     FROM home
      WHERE id = ?
      LIMIT ?`,
     [1, 1]
@@ -20,7 +20,7 @@ async function updateHome(payload) {
   const { hero_title, hero_subtitle, cta_text, cta_link } = payload;
 
   const [result] = await pool.query(
-    `UPDATE cms_home
+    `UPDATE home
      SET hero_title = ?, hero_subtitle = ?, cta_text = ?, cta_link = ?
      WHERE id = ?
      LIMIT ?`,
