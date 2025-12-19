@@ -15,7 +15,7 @@ async function saveHomeCMS(req, res) {
       cta_text: String(req.body?.cta_text || "").trim(),
       cta_link: String(req.body.cta_link || "").trim()
     };
-    console.log(payload, 'payload')
+    
     if (!payload.hero_title) {
       const data = await getHome();
       return res.status(400).render("admin/home", {
@@ -26,7 +26,8 @@ async function saveHomeCMS(req, res) {
       });
     }
 
-    await updateHome(payload);
+    const r = await updateHome(payload);
+    console.log(r)
     const data = await getHome();
 
     return res.render("admin/home", { user: req.user, data, saved: true, error: null });
