@@ -154,7 +154,7 @@
         type="email"
         name="email"
         placeholder="admin@kenaritower.com"
-        value="admin@kenaritower.com"
+        value="<%= email || '' %>"
         required
         />
         <!-- value="<%= email || '' %>" -->
@@ -165,7 +165,7 @@
         name="password"
         placeholder="••••••••"
         required
-        value="Admin12345!"
+        value=""
       />
 
       <button type="submit">Sign In</button>
