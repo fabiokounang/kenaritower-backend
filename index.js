@@ -57,9 +57,13 @@ app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 // session
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'kenari-secret',
+  secret: process.env.SESSION_SECRET || "kenari-secret",
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === "production", // true di https
+    sameSite: "lax", // untuk admin di cms.kenaritower.com
+  }
 }));
 
 // routes
