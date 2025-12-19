@@ -7,9 +7,4 @@ async function getCMS(req, res) {
   return res.json({ ok: true, data });
 }
 
-async function getCMS(req, res) {
-  const data = await getPublicCMS();
-  return res.json({ ok: true, data });
-}
-
 module.exports = { getCMS };

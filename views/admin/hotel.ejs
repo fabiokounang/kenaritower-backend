@@ -257,15 +257,18 @@
 
             <div>
               <label>Phone</label>
-              <input name="phone" value="<%= data?.phone || '' %>" placeholder="+62..." />
+              <input name="phone" type="tel" value="<%= data?.phone || '' %>" placeholder="+62..." />
             </div>
 
-            <label>Email</label>
-            <input
-              name="email"
-              value="<%= data?.email || '' %>"
-              placeholder="info@kenaritower.com"
-            />
+             <div>
+               <label>Email</label>
+               <input
+                 name="email"
+                 type="email"
+                 value="<%= data?.email || '' %>"
+                 placeholder="info@kenaritower.com"
+               />
+             </div>
 
             <div>
               <label>WhatsApp</label>

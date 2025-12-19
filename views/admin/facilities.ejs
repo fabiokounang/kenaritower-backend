@@ -2,125 +2,290 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Facilities • Kenari Tower Hotel</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    *{box-sizing:border-box}
-    body{
-      margin:0;min-height:100vh;font-family:Inter,sans-serif;
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
       background:
         radial-gradient(1200px 600px at 10% 10%, rgba(99,102,241,.15), transparent 40%),
         radial-gradient(800px 500px at 90% 90%, rgba(16,185,129,.12), transparent 40%),
-        linear-gradient(180deg,#0b1220,#020617);
-      color:#e5e7eb;padding:24px
-    }
-    .shell{max-width:1100px;margin:0 auto}
-
-    /* topbar (same) */
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:16px 18px;border-radius:20px;
-      background:rgba(15,23,42,.70);backdrop-filter:blur(12px);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 18px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03)
-    }
-    .brand h1{margin:0;font-size:16px;font-weight:600}
-    .brand p{margin:4px 0 0;font-size:12px;color:#9ca3af}
-    .userbox{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .pill{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.10);
-      background:rgba(2,6,23,.55);font-size:12px;color:#cbd5f5}
-    .btnGhost{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);color:#e5e7eb;font-size:12px;
-      text-decoration:none;font-weight:600}
-    .logoutBtn{padding:10px 12px;border-radius:14px;background:rgba(239,68,68,.10);
-      border:1px solid rgba(239,68,68,.25);color:#fecaca;font-size:12px;font-weight:600;border:none}
-
-    .card{
-      margin-top:18px;background:rgba(15,23,42,.70);
-      border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:18px
+        linear-gradient(180deg, #0b1220, #020617);
+      color: #e5e7eb;
+      padding: 24px;
     }
 
-    .row{
-      margin-top:14px;padding:16px;border-radius:18px;
-      background:rgba(2,6,23,.60);border:1px solid rgba(255,255,255,.08)
+    .shell { max-width: 1100px; margin: 0 auto; }
+
+    /* ✅ CONSISTENT HEADER */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.70);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.03);
     }
 
-    label{font-size:12px;color:#cbd5f5;margin:6px 0 4px;display:block}
-    input{
-      width:100%;padding:10px 12px;border-radius:12px;
+    .brand h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: .3px;
+      color: #e5e7eb;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .userbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(2, 6, 23, .55);
+      font-size: 12px;
+      color: #cbd5f5;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logoutBtn {
+      border: none;
+      cursor: pointer;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(239, 68, 68, .10);
+      border: 1px solid rgba(239, 68, 68, .25);
+      color: #fecaca;
+      font-weight: 600;
+      font-size: 12px;
+      transition: all .2s ease;
+    }
+
+    .logoutBtn:hover {
+      transform: translateY(-1px);
+      background: rgba(239, 68, 68, .14);
+      border-color: rgba(239, 68, 68, .35);
+    }
+
+    .card {
+      margin-top: 18px;
+      background: rgba(15, 23, 42, 0.70);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow:
+        0 18px 40px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .heroRow {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(2, 6, 23, .60);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    label {
+      display:block;
+      font-size:12px;
+      color:#cbd5f5;
+      margin:8px 0 4px;
+    }
+
+    input, textarea {
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
       border:1px solid rgba(255,255,255,.12);
-      background:rgba(2,6,23,.60);color:#e5e7eb
+      background: rgba(2, 6, 23, .60);
+      color:#e5e7eb;
+      font-size:13px;
     }
 
-    .grid{display:grid;grid-template-columns:80px 1.2fr 2fr 1fr 1fr;gap:12px}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    textarea { min-height: 70px; }
 
-    .saveBar{
-      margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);
-      display:flex;justify-content:space-between;align-items:center
+    .rowGrid {
+      display:grid;
+      grid-template-columns: 90px 1fr;
+      gap: 14px;
     }
 
-    .btnPrimary{
-      background:linear-gradient(135deg,#6366f1,#4f46e5);
-      color:white;border:none;padding:12px 16px;
-      border-radius:14px;font-weight:600;font-size:12px
+    .iconBox {
+      width: 90px;
+      height: 78px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 30px;
     }
 
-    .ok{color:#22c55e;font-size:12px}
-    .err{color:#f87171;font-size:12px}
+    .miniGrid {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btnPrimary {
+      padding:12px 16px;
+      border-radius:14px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      font-size:13px;
+      background: linear-gradient(135deg,#6366f1,#4f46e5);
+      color:white;
+    }
+
+    .dangerBtn {
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(239,68,68,.25);
+      background: rgba(239,68,68,.10);
+      color:#fecaca;
+      font-weight:600;
+      font-size:12px;
+      cursor:pointer;
+      margin-top: 10px;
+    }
+
+    .saveBar {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .statusOk { font-size: 12px; color: #86efac; }
+    .statusErr { font-size: 12px; color: #fca5a5; }
   </style>
 </head>
 
 <body>
 <div class="shell">
 
+  <!-- ✅ Header konsisten -->
   <div class="topbar">
     <div class="brand">
       <h1>Kenari Tower Hotel</h1>
-      <p>Facilities • CMS</p>
+      <p>Facilities</p>
     </div>
+
     <div class="userbox">
-      <div class="pill"><%= user?.email %></div>
-      <div class="pill">Role: <%= user?.role %></div>
-      <a class="btnGhost" href="/admin">← Dashboard</a>
+      <div class="pill"><%= user?.email || "unknown" %></div>
+      <div class="pill">Role: <%= user?.role || "-" %></div>
+
+      <a href="/admin" class="pill">Dashboard</a>
+
       <form method="POST" action="/auth/logout" style="margin:0;">
-        <button class="logoutBtn">Logout</button>
+        <button class="logoutBtn" type="submit">Logout</button>
       </form>
     </div>
   </div>
 
+  <!-- ✅ ADD -->
+  <form method="POST" action="/admin/facilities/add">
+    <div class="card">
+      <div style="font-weight:600;">Add Facility</div>
+      <div style="font-size:12px;color:#9ca3af;margin-top:4px;">
+        Isi icon emoji + title + subtitle. (Contoh icon: 📶 🛏️ 🍽️)
+      </div>
+
+      <label>Icon (emoji)</label>
+      <input name="icon" placeholder="📶" />
+
+      <label>Title</label>
+      <input name="title" placeholder="Free Wi-Fi" />
+
+      <label>Subtitle</label>
+      <textarea name="subtitle" placeholder="High-speed internet access throughout the hotel to keep you connected"></textarea>
+
+      <div style="margin-top:12px;text-align:right;">
+        <button class="btnPrimary" type="submit">+ Add Facility</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- ✅ UPDATE ALL + DELETE per item (NO nested form) -->
   <form method="POST" action="/admin/facilities">
     <div class="card">
+      <div style="font-weight:600;">Update Facilities</div>
+      <div style="font-size:12px;color:#9ca3af;margin-top:4px;">
+        Edit semua item sekaligus, lalu klik Save.
+      </div>
 
-      <% facilities.forEach((f,i)=>{ %>
-        <div class="row">
-          <input type="hidden" name="items[<%=i%>][id]" value="<%= f.id %>">
+      <% (items || []).forEach((it, i) => { %>
+        <div class="heroRow">
+          <input type="hidden" name="items[<%=i%>][id]" value="<%= it.id %>">
 
-          <div class="grid">
+          <div class="rowGrid">
+            <div class="iconBox"><%= it.icon || "✨" %></div>
+
             <div>
               <label>Icon</label>
-              <input name="items[<%=i%>][icon]" value="<%= f.icon %>">
-            </div>
+              <input name="items[<%=i%>][icon]" value="<%= it.icon || '' %>">
 
-            <div>
               <label>Title</label>
-              <input name="items[<%=i%>][title]" value="<%= f.title %>">
-            </div>
+              <input name="items[<%=i%>][title]" value="<%= it.title || '' %>">
 
-            <div>
               <label>Subtitle</label>
-              <input name="items[<%=i%>][subtitle]" value="<%= f.subtitle %>">
-            </div>
+              <textarea name="items[<%=i%>][subtitle]"><%= it.subtitle || '' %></textarea>
 
-            <div>
-              <label>Sort</label>
-              <input name="items[<%=i%>][sort_order]" value="<%= f.sort_order %>">
-            </div>
+              <div class="miniGrid">
+                <div>
+                  <label>Sort Order</label>
+                  <input name="items[<%=i%>][sort_order]" value="<%= it.sort_order %>">
+                </div>
+                <div>
+                  <label>Active (1 / 0)</label>
+                  <input name="items[<%=i%>][is_active]" value="<%= it.is_active %>">
+                </div>
+              </div>
 
-            <div>
-              <label>Active</label>
-              <input name="items[<%=i%>][is_active]" value="<%= f.is_active %>">
+              <!-- ✅ delete button WITHOUT nested form -->
+              <button
+                class="dangerBtn"
+                type="submit"
+                formaction="/admin/facilities/<%= it.id %>/delete"
+                formmethod="POST"
+                onclick="return confirm('Hapus facility ini?')"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -128,9 +293,10 @@
 
       <div class="saveBar">
         <span>
-          <% if (saved) { %><span class="ok">✔ Saved</span><% } %>
-          <% if (error) { %><span class="err"><%= error %></span><% } %>
+          <% if (saved) { %><span class="statusOk">✅ Saved successfully.</span><% } %>
+          <% if (error) { %><span class="statusErr">❌ <%= error %></span><% } %>
         </span>
+
         <button class="btnPrimary" type="submit">Save Facilities</button>
       </div>
 

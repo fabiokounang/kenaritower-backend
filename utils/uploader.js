@@ -23,5 +23,6 @@ function makeUploader(folder) {
 
 module.exports = {
   heroUpload: makeUploader("hero"),
-  galleryUpload: makeUploader("gallery")
+  galleryUpload: makeUploader("gallery"),
+  aboutUpload: makeUploader("about")
 };

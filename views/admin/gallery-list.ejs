@@ -1,151 +1,299 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery • Kenari Tower Hotel</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    body{margin:0;padding:24px;font-family:Inter;background:#020617;color:#e5e7eb}
-    .shell{max-width:1100px;margin:auto}
-    .topbar{display:flex;justify-content:space-between;padding:16px 18px;
-      background:#0f172a;border-radius:20px}
-    .card{margin-top:18px;padding:18px;border-radius:20px;background:#0f172a}
-    .item{margin-top:14px;padding:16px;border-radius:18px;background:#020617}
-    .grid{display:grid;grid-template-columns:110px 1fr;gap:14px}
-    .thumb{width:110px;height:78px;border-radius:14px;overflow:hidden;border:1px solid #1e293b}
-    .thumb img{width:100%;height:100%;object-fit:cover}
-    label{font-size:12px;margin-top:8px;display:block}
-    input,textarea{width:100%;padding:10px;border-radius:12px;
-      border:1px solid #1e293b;background:#020617;color:#e5e7eb}
-    textarea{min-height:80px}
-    .mini{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .save{margin-top:16px;display:flex;justify-content:space-between}
-    button{padding:12px 16px;border-radius:14px;border:none;
-      background:#4f46e5;color:white;font-weight:600}
+    * {
+      box-sizing: border-box;
+    }
 
-      /* ✅ SAME TOPBAR STYLE AS DASHBOARD */
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 18px;
-  border-radius: 20px;
-  background: rgba(15, 23, 42, 0.70);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.03);
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(99, 102, 241, .15), transparent 40%),
+        radial-gradient(800px 500px at 90% 90%, rgba(16, 185, 129, .12), transparent 40%),
+        linear-gradient(180deg, #0b1220, #020617);
+      color: #e5e7eb;
+      padding: 24px;
+    }
 
-.brand h1 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: .3px;
-}
-.brand p {
-  margin: 4px 0 0;
-  font-size: 12px;
-  color: #9ca3af;
-}
+    .shell {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-.userbox {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(15, 23, 42, .70);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
 
-.pill {
-  padding: 8px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(2, 6, 23, .55);
-  font-size: 12px;
-  color: #cbd5f5;
-  white-space: nowrap;
-}
+    .card {
+      margin-top: 18px;
+      background: rgba(15, 23, 42, .70);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 20px;
+      padding: 18px;
+    }
 
-.btnGhost {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
-  color: #e5e7eb;
-  font-weight: 600;
-  font-size: 12px;
-  text-decoration: none;
-  transition: all .2s ease;
-  cursor: pointer;
-}
-.btnGhost:hover { transform: translateY(-1px); }
+    .heroRow {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(2, 6, 23, .60);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
 
-.logoutBtn {
-  border: none;
-  cursor: pointer;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(239, 68, 68, .10);
-  border: 1px solid rgba(239, 68, 68, .25);
-  color: #fecaca;
-  font-weight: 600;
-  font-size: 12px;
-  transition: all .2s ease;
-}
-.logoutBtn:hover {
-  transform: translateY(-1px);
-  background: rgba(239, 68, 68, .14);
-  border-color: rgba(239, 68, 68, .35);
-}
+    .rowGrid {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 14px;
+    }
 
+    .thumb {
+      width: 110px;
+      height: 78px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: #cbd5f5;
+      margin: 8px 0 4px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(2, 6, 23, .60);
+      color: #e5e7eb;
+      font-size: 13px;
+    }
+
+    textarea {
+      min-height: 80px;
+    }
+
+    .miniGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btnPrimary {
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+    }
+
+    /* ✅ SAME TOPBAR STYLE AS DASHBOARD */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.70);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, .35),
+        inset 0 1px 0 rgba(255, 255, 255, .03);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: .3px;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .userbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(2, 6, 23, .55);
+      font-size: 12px;
+      color: #cbd5f5;
+      white-space: nowrap;
+    }
+
+    .btnGhost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .10);
+      color: #e5e7eb;
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      transition: all .2s ease;
+      cursor: pointer;
+    }
+
+    .btnGhost:hover {
+      transform: translateY(-1px);
+    }
+
+    .logoutBtn {
+      border: none;
+      cursor: pointer;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(239, 68, 68, .10);
+      border: 1px solid rgba(239, 68, 68, .25);
+      color: #fecaca;
+      font-weight: 600;
+      font-size: 12px;
+      transition: all .2s ease;
+    }
+
+    .logoutBtn:hover {
+      transform: translateY(-1px);
+      background: rgba(239, 68, 68, .14);
+      border-color: rgba(239, 68, 68, .35);
+    }
+
+     .saveBar {
+      margin-top: 14px;
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .btnPrimary {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      box-shadow: 0 10px 25px rgba(79,70,229,.35);
+      border: 0;
+      padding: 12px 16px;
+    }
   </style>
 </head>
 
 <body>
-<div class="shell">
-  <div class="topbar">
-  <div class="brand">
-    <h1>Kenari Tower Hotel</h1>
-    <p>Gallery • CMS</p>
-  </div>
+  <div class="shell">
 
-  <div class="userbox">
-    <div class="pill"><%= user?.email || "unknown" %></div>
-    <div class="pill">Role: <%= user?.role || "-" %></div>
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="brand">
+        <h1>Kenari Tower Hotel</h1>
+        <p>Hero Carousel Images • CMS</p>
+      </div>
 
-    <a class="btnGhost" href="/admin">← Dashboard</a>
+      <div class="userbox">
+        <div class="pill"><%= user?.email || "unknown" %></div>
+        <div class="pill">Role: <%= user?.role || "-" %></div>
 
-    <form method="POST" action="/auth/logout" style="margin:0;">
-      <button class="logoutBtn" type="submit">Logout</button>
+        <a class="btnGhost" href="/admin">← Dashboard</a>
+
+        <form method="POST" action="/auth/logout" style="margin:0;">
+          <button class="logoutBtn" type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- ADD GALLERY -->
+    <form method="POST" action="/admin/gallery/add" enctype="multipart/form-data">
+      <div class="card">
+        <div style="font-weight:600;">Add Gallery Item</div>
+
+        <label>Upload Image</label>
+        <input type="file" name="image" required>
+
+        <label>Overlay Label</label>
+        <input name="overlay_label">
+
+        <label>Title</label>
+        <input name="title">
+
+        <label>Description</label>
+        <textarea name="description"></textarea>
+
+        <div style="margin-top:12px;text-align:right;">
+          <button class="btnPrimary">+ Add Gallery</button>
+        </div>
+      </div>
     </form>
-  </div>
-</div>
 
+    <!-- UPDATE ALL -->
+    <form method="POST" action="/admin/gallery" enctype="multipart/form-data">
+      <div class="card">
 
-  <form method="POST" action="/admin/gallery" enctype="multipart/form-data">
-    <div class="card">
-
-      <% (items || []).forEach((it, i) => { %>
-        <div class="item">
+        <% (items || []).forEach((it, i) => { %>
+        <div class="heroRow">
           <input type="hidden" name="items[<%=i%>][id]" value="<%= it.id %>">
 
-          <div class="grid">
+          <div class="rowGrid">
             <div class="thumb">
               <% if (it.image_path) { %>
-                <img src="<%= it.image_path %>">
+              <img src="<%= it.image_path %>" />
               <% } else { %>No Image<% } %>
             </div>
 
             <div>
-              <label>Upload Image</label>
-              <input type="file" name="image_<%= it.id %>" accept="image/*">
+              <label>Replace Image</label>
+              <input type="file" name="image_<%= it.id %>">
 
               <label>Overlay Label</label>
               <input name="items[<%=i%>][overlay_label]" value="<%= it.overlay_label || '' %>">
@@ -156,35 +304,38 @@
               <label>Description</label>
               <textarea name="items[<%=i%>][description]"><%= it.description || '' %></textarea>
 
-              <div class="mini">
+              <div class="miniGrid">
                 <div>
                   <label>Sort Order</label>
                   <input name="items[<%=i%>][sort_order]" value="<%= it.sort_order %>">
                 </div>
                 <div>
-                  <label>Active (1/0)</label>
+                  <label>Active (1 / 0)</label>
                   <input name="items[<%=i%>][is_active]" value="<%= it.is_active %>">
                 </div>
               </div>
+
+              <!-- DELETE (NO NESTED FORM) -->
+              <button class="logoutBtn" type="submit" formaction="/admin/gallery/<%= it.id %>/delete" formmethod="POST"
+                onclick="return confirm('Hapus gallery item ini?')" style="margin-top:10px;">
+                Delete
+              </button>
             </div>
           </div>
         </div>
-      <% }) %>
+        <% }) %>
 
-      <div class="save">
-        <span style="font-size:12px;color:#94a3b8">Upload hanya mengubah item yang dipilih</span>
-        <button type="submit">Save Gallery</button>
+        <div class="saveBar">
+          <span style="font-size:12px;color:#9ca3af;">
+            Semua perubahan gallery disimpan sekaligus
+          </span>
+          <button class="btnPrimary">Update Gallery</button>
+        </div>
+
       </div>
+    </form>
 
-      <% if (saved) { %>
-        <p style="color:#22c55e">✔ Gallery updated</p>
-      <% } %>
-      <% if (error) { %>
-        <p style="color:#f87171"><%= error %></p>
-      <% } %>
-
-    </div>
-  </form>
-</div>
+  </div>
 </body>
+
 </html>
