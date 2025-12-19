@@ -16,8 +16,6 @@ const admin = require("./routes/admin");
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-const cors = require("cors");
-
 const isAllowedOrigin = (origin) => {
   if (!origin) return true; // curl, server-to-server
 
