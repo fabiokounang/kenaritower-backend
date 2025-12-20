@@ -55,7 +55,7 @@ async function postLogin(req, res) {
 
 function logout(req, res) {
   clearJwtCookie(res);
-  return res.redirect("/login");
+  return res.redirect("/auth/login");
 }
 
 /** Middleware protect */
